@@ -1,0 +1,106 @@
+# Avue 组件库开发规范
+
+## 概述
+
+本项目使用 Avue 2.8.25（基于 Element UI）进行后台管理系统开发。当创建表格、表单、树形结构页面时，请遵循以下规范。
+
+## 核心组件
+
+### avue-crud（表格）
+```vue
+<avue-crud
+  :option="option"
+  :data="data"
+  :page.sync="page"
+  :table-loading="loading"
+  v-model="form"
+  ref="crud"
+  @on-load="onLoad"
+  @row-save="rowSave"
+  @row-update="rowUpdate"
+  @row-del="rowDel"
+/>
+```
+
+### avue-form（表单）
+```vue
+<avue-form ref="form" :option="formOption" v-model="form" @submit="handleSubmit" />
+```
+
+### avue-tree（树）
+```vue
+<avue-tree :option="treeOption" :data="treeData" @node-click="nodeClick" />
+```
+
+## 必须遵守的规则
+
+### 1. 弹窗必须添加 append-to-body
+```vue
+<el-dialog :visible.sync="dialogVisible" append-to-body>
+```
+
+### 2. 按钮默认 size="small"
+```vue
+<el-button type="primary" size="small">确定</el-button>
+```
+
+### 3. 使用项目封装组件
+- `<override-container>` 代替 `<basic-container>`
+- `<override-search>` 搜索组件
+- `<override-empty>` 空状态组件
+
+## option 标准配置
+
+```javascript
+option: {
+  height: 'auto',
+  calcHeight: 70,
+  border: true,
+  index: true,
+  selection: true,
+  menuWidth: 250,
+  dialogWidth: '60%',
+  dialogClickModal: false,
+  column: [
+    {
+      label: '名称',
+      prop: 'name',
+      search: true,
+      overHidden: true,
+      rules: [{ required: true, message: '必填' }]
+    }
+  ]
+}
+```
+
+## 字典配置
+
+远程字典：
+```javascript
+{
+  type: 'select',
+  dicUrl: '/api/blade-system/dict/dictionary?code=status',
+  props: { label: 'dictValue', value: 'dictKey' }
+}
+```
+
+本地字典：
+```javascript
+{
+  type: 'select',
+  dicData: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]
+}
+```
+
+## 全局方法
+
+- `this.vaildData(value, default)` - 权限验证
+- `this.findObject(column, prop)` - 查找列配置
+- `this.validatenull(value)` - 判断为空
+- `this.deepCopy(obj)` - 深拷贝
+
+## 参考文件
+
+- `src/mixins/crud.js`
+- `src/option/system/dict.js`
+- `src/views/system/user.vue`
