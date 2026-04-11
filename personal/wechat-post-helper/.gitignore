@@ -1,0 +1,21 @@
+# 依赖
+node_modules/
+package-lock.json
+
+# 生成的文件
+*.docx
+output/
+
+# 配置文件（包含敏感信息）
+wechat-config.json
+.env
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db

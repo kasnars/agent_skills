@@ -1,0 +1,21 @@
+{
+  "name": "wechat-post-helper",
+  "version": "1.0.0",
+  "description": "微信公众号文章生成工具，支持生成标准.docx格式文件",
+  "main": "scripts/generate-docx.js",
+  "scripts": {
+    "generate": "node scripts/generate-docx.js",
+    "publish": "node scripts/publish-draft.js"
+  },
+  "keywords": [
+    "wechat",
+    "article",
+    "docx",
+    "generator"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "docx": "^8.5.0"
+  }
+}
